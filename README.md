@@ -15,10 +15,11 @@ To use this tool, you'll need Python installed on your system. The tool also req
 
 1. **Install the Package**:
    You can install `zimo-web-screenshot` directly from PyPI using pip:
-   
+
    ```bash
    pip install zimo-web-screenshot
    ```
+
 2. **Install a Web Driver**:
    You need to have at least one recognizable Chrome web driver installed on your device. This is typically bundled within a Chrome browser.
 
