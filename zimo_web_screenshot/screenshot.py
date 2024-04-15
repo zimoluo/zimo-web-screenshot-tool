@@ -11,6 +11,7 @@ def take_screenshot(width, height, theme_name, pathname, delay, filename):
     chrome_options = Options()
     chrome_options.add_argument(f"--window-size={width},{height}")
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--hide-scrollbars")
 
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(f"https://www.zimoluo.me/{pathname}")
