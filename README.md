@@ -15,8 +15,8 @@ To run this tool, you'll need Python and Selenium. Here are the steps to set it 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/web-screenshot.git
-   cd web-screenshot
+   git clone https://github.com/zimoluo/zimo-web-screenshot-tool.git
+   cd zimo-web-screenshot-tool
    ```
 2. **Install dependencies**:
    You will need Python and pip installed. Then, you can install Selenium:
