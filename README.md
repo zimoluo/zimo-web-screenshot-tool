@@ -38,7 +38,7 @@ python scraper.py --width 1200 --height 800 --theme dark --pathname about --dela
 
 - `-w`, `--width`: Width of the browser window (default: `1600`)
 - `-H`, `--height`: Height of the browser window (default: `900`)
-- `-theme`, `--theme`: Theme name to apply (default: `pixelland`)
-- `-pathname`, `--pathname`: Pathname of the URL (default: `blog`)
-- `-delay`, `--delay`: Delay in seconds before taking the screenshot (default: `0`)
+- `-t`, `--theme`: Theme name to apply (default: `pixelland`)
+- `-p`, `--pathname`: Pathname of the URL (default: `blog`)
+- `-d`, `--delay`: Delay in seconds before taking the screenshot (default: `0`)
 - `-f`, `--filename`: Output filename without the `.png` suffix (default: `webpage_screenshot`)
