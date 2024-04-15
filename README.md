@@ -34,7 +34,7 @@ To use the tool, navigate to the project directory and run the script with the r
 python scraper.py --width 1200 --height 800 --theme dark --pathname about --delay 2
 ```
 
-## Command Line Arguments
+**Command Line Arguments**
 
 - `-w`, `--width`: Width of the browser window (default: `1600`)
 - `-H`, `--height`: Height of the browser window (default: `900`)
