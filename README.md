@@ -11,27 +11,22 @@ This command-line tool allows users to take screenshots of Zimo Web pages with c
 
 ## Installation
 
-To run this tool, you'll need Python and Selenium. Here are the steps to set it up:
+To use this tool, you'll need Python installed on your system. The tool also requires Selenium, which will be automatically installed when you install the package from PyPI.
 
-1. **Clone the repository**:
+1. **Install the Package**:
+   You can install `zimo-web-screenshot` directly from PyPI using pip:
    ```bash
-   git clone https://github.com/zimoluo/zimo-web-screenshot-tool.git
-   cd zimo-web-screenshot-tool
+   pip install zimo-web-screenshot
    ```
-2. **Install dependencies**:
-   You will need Python and pip installed. Then, you can install Selenium:
-   ```bash
-   pip install selenium
-   ```
-3. **Web Driver**:
-   You need to have at least one recognizable web driver installed on your device. This is typically bundled within a Chrome browser.
+2. **Install a Web Driver**:
+   You need to have at least one recognizable Chrome web driver installed on your device. This is typically bundled within a Chrome browser.
 
 ## Usage
 
 To use the tool, navigate to the project directory and run the script with the required options. Example below:
 
 ```bash
-python screenshot.py --width 1600 --height 900 --theme plainDark --pathname about --delay 0
+zimo-web-screenshot --width 1600 --height 900 --theme plainDark --pathname about --delay 0
 ```
 
 **Command Line Arguments**
