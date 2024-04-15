@@ -31,7 +31,7 @@ To run this tool, you'll need Python and Selenium. Here are the steps to set it 
 To use the tool, navigate to the project directory and run the script with the required options. Example below:
 
 ```bash
-python screenshot.py --width 1200 --height 800 --theme plainDark --pathname about --delay 2
+python screenshot.py --width 1600 --height 900 --theme plainDark --pathname about --delay 0
 ```
 
 **Command Line Arguments**
