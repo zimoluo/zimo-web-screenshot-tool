@@ -15,6 +15,7 @@ To use this tool, you'll need Python installed on your system. The tool also req
 
 1. **Install the Package**:
    You can install `zimo-web-screenshot` directly from PyPI using pip:
+   
    ```bash
    pip install zimo-web-screenshot
    ```
