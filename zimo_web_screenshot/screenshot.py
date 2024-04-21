@@ -8,33 +8,39 @@ import time
 
 
 def take_screenshot(width, height, theme_name, pathname, delay, filename):
-    chrome_options = Options()
-    chrome_options.add_argument(f"--window-size={width},{height}")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--hide-scrollbars")
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument(f"--window-size={width},{height}")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--hide-scrollbars")
 
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(f"https://www.zimoluo.me/{pathname}")
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(f"https://www.zimoluo.me/{pathname}")
 
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, "menu-button"))).click()
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "menu-button"))).click()
 
-    time.sleep(0.4)
+        time.sleep(0.4)
 
-    button_xpath = f"//button[.//img[@alt='Use {theme_name} theme']]"
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, button_xpath))).click()
-    time.sleep(0.4)
+        button_xpath = f"//button[.//img[@alt='Use {theme_name} theme']]"
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, button_xpath))).click()
+        time.sleep(0.4)
 
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, "menu-button"))).click()
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "menu-button"))).click()
 
-    time.sleep(1)
+        time.sleep(1)
 
-    time.sleep(delay)
+        time.sleep(delay)
 
-    driver.save_screenshot(f'{filename}.png')
-    driver.quit()
+        driver.save_screenshot(f'{filename}.png')
+    except KeyboardInterrupt:
+        print("Screenshot taking was aborted by the user.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        driver.quit()
 
 
 def main():
@@ -55,9 +61,15 @@ def main():
 
     args = parser.parse_args()
 
-    take_screenshot(args.width, args.height, args.theme,
-                    args.pathname, args.delay, args.filename)
+    try:
+        take_screenshot(args.width, args.height, args.theme,
+                        args.pathname, args.delay, args.filename)
+    except Exception as e:
+        print(f"Failed to take screenshot: {e}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Program was interrupted by the user.")
