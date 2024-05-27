@@ -71,7 +71,7 @@ def main():
     parser.add_argument('-f', '--filename', type=str,
                         default='webpage_screenshot', help='Output filename without suffix')
     parser.add_argument('-c', '--custom', type=str,
-                        help='Path to custom theme JSON config data')
+                        help='Path to the custom theme JSON config data')
 
     args = parser.parse_args()
 
