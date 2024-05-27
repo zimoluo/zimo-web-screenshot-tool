@@ -1,4 +1,5 @@
 import argparse
+import json
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,7 +8,12 @@ from selenium.webdriver.common.by import By
 import time
 
 
-def take_screenshot(width, height, theme_name, pathname, delay, filename):
+def set_local_storage(driver, data):
+    driver.execute_script(
+        f"localStorage.setItem('websiteSettings', '{json.dumps(data)}');")
+
+
+def take_screenshot(width, height, theme_name, pathname, delay, filename, custom_data=None):
     try:
         chrome_options = Options()
         chrome_options.add_argument(f"--window-size={width},{height}")
@@ -18,21 +24,27 @@ def take_screenshot(width, height, theme_name, pathname, delay, filename):
         driver.get(f"https://www.zimoluo.me/{pathname}")
 
         WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "menu-button"))).click()
+            EC.presence_of_element_located((By.TAG_NAME, "body")))
 
-        time.sleep(0.4)
+        # Prepare websiteSettings data
+        if custom_data:
+            settings_data = {
+                "pageTheme": {x: "custom" for x in ["home", "blog", "photos", "projects", "about", "design", "management", "themeMaker"]},
+                "customThemeIndex": 0,
+                "customThemeData": [custom_data]
+            }
+        else:
+            settings_data = {
+                "pageTheme": {x: theme_name for x in ["home", "blog", "photos", "projects", "about", "design", "management", "themeMaker"]}
+            }
 
-        button_xpath = f"//button[.//img[@alt='Use {theme_name} theme']]"
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, button_xpath))).click()
-        time.sleep(0.4)
+        set_local_storage(driver, settings_data)
 
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "menu-button"))).click()
+        driver.refresh()
 
-        time.sleep(1)
+        time.sleep(2)  # Wait for page to load
 
-        time.sleep(delay)
+        time.sleep(delay)  # Optional delay before taking the screenshot
 
         driver.save_screenshot(f'{filename}.png')
     except KeyboardInterrupt:
@@ -58,12 +70,19 @@ def main():
                         default=0, help='Delay before taking the screenshot')
     parser.add_argument('-f', '--filename', type=str,
                         default='webpage_screenshot', help='Output filename without suffix')
+    parser.add_argument('-c', '--custom', type=str,
+                        help='Path to custom theme JSON config data')
 
     args = parser.parse_args()
 
     try:
+        custom_data = None
+        if args.custom:
+            with open(args.custom, 'r') as file:
+                custom_data = json.load(file)
+
         take_screenshot(args.width, args.height, args.theme,
-                        args.pathname, args.delay, args.filename)
+                        args.pathname, args.delay, args.filename, custom_data)
     except Exception as e:
         print(f"Failed to take screenshot: {e}")
 

@@ -33,9 +33,10 @@ zimo-web-screenshot --width 1600 --height 900 --theme plainDark --pathname about
 
 **Command Line Arguments**
 
-- `-w`, `--width`: Width of the browser window (default: `1600`)
-- `-H`, `--height`: Height of the browser window (default: `900`)
-- `-t`, `--theme`: Theme name to apply (default: `pixelland`)
-- `-p`, `--pathname`: Pathname of the URL (default: `blog`)
-- `-d`, `--delay`: Delay in seconds before taking the screenshot (default: `0`)
-- `-f`, `--filename`: Output filename without the `.png` suffix (default: `webpage_screenshot`)
+- `-w`, `--width`: Width of the browser window. (default: `1600`)
+- `-H`, `--height`: Height of the browser window. (default: `900`)
+- `-t`, `--theme`: Theme name to apply. (default: `pixelland`)
+- `-p`, `--pathname`: Pathname of the URL. (default: `blog`)
+- `-d`, `--delay`: Delay in seconds before taking the screenshot. (default: `0`)
+- `-f`, `--filename`: Output filename without the `.png` suffix. (default: `webpage_screenshot`)
+- `-c`, `--custom`: Path to custom theme JSON config data file. This argument overrides `-t`. (default: does not exist)
