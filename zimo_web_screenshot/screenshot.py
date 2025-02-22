@@ -39,11 +39,13 @@ def take_screenshot(width, height, theme_name, pathname, delay, filename, qualit
             settings_data = {
                 "pageTheme": {x: "custom" for x in ["home", "blog", "photos", "projects", "about", "design", "management", "themeMaker"]},
                 "customThemeIndex": 0,
-                "customThemeData": [custom_data]
+                "customThemeData": [custom_data],
+                "navigationBar": "always",
             }
         else:
             settings_data = {
-                "pageTheme": {x: theme_name for x in ["home", "blog", "photos", "projects", "about", "design", "management", "themeMaker"]}
+                "pageTheme": {x: theme_name for x in ["home", "blog", "photos", "projects", "about", "design", "management", "themeMaker"]},
+                "navigationBar": "always",
             }
 
         set_local_storage(driver, settings_data)
