@@ -39,4 +39,5 @@ zimo-web-screenshot --width 1600 --height 900 --theme plainDark --pathname about
 - `-p`, `--pathname`: Pathname of the URL. (default: `design`)
 - `-d`, `--delay`: Delay in seconds before taking the screenshot. (default: `0`)
 - `-f`, `--filename`: Output filename without the `.png` suffix. (default: `webpage_screenshot`)
+- `-q`, `--quality`: The quality of the output file. (default: `1.5`)
 - `-c`, `--custom`: Path to the custom theme JSON config data file. This argument overrides `-t`. (default: does not exist)

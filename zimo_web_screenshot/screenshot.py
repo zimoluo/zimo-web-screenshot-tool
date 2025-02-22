@@ -13,7 +13,7 @@ def set_local_storage(driver, data):
         f"localStorage.setItem('websiteSettings', '{json.dumps(data)}');")
 
 
-def take_screenshot(width, height, theme_name, pathname, delay, filename, custom_data=None):
+def take_screenshot(width, height, theme_name, pathname, delay, filename, quality, custom_data=None):
     try:
         chrome_options = Options()
         chrome_options.add_argument(f"--window-size={width},{height}")
@@ -26,7 +26,7 @@ def take_screenshot(width, height, theme_name, pathname, delay, filename, custom
         driver.execute_cdp_cmd('Emulation.setDeviceMetricsOverride', {
             'width': width,
             'height': height,
-            'deviceScaleFactor': 1,
+            'deviceScaleFactor': quality,
             'mobile': False
         })
         driver.get(f"https://www.zimoluo.me/{pathname}")
@@ -78,6 +78,8 @@ def main():
                         default=0, help='Delay before taking the screenshot')
     parser.add_argument('-f', '--filename', type=str,
                         default='webpage_screenshot', help='Output filename without suffix')
+    parser.add_argument('-q', '--quality', type=float,
+                        default=1.5, help='The quality of the output image')
     parser.add_argument('-c', '--custom', type=str,
                         help='Path to the custom theme JSON config data')
 
@@ -90,7 +92,7 @@ def main():
                 custom_data = json.load(file)
 
         take_screenshot(args.width, args.height, args.theme,
-                        args.pathname, args.delay, args.filename, custom_data)
+                        args.pathname, args.delay, args.filename, args.quality, custom_data)
     except Exception as e:
         print(f"Failed to take screenshot: {e}")
 
