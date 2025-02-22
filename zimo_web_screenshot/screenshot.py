@@ -19,8 +19,16 @@ def take_screenshot(width, height, theme_name, pathname, delay, filename, custom
         chrome_options.add_argument(f"--window-size={width},{height}")
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--hide-scrollbars")
+        chrome_options.add_argument('--force-device-scale-factor=1')
+        chrome_options.add_argument('--high-dpi-support=1')
 
         driver = webdriver.Chrome(options=chrome_options)
+        driver.execute_cdp_cmd('Emulation.setDeviceMetricsOverride', {
+            'width': width,
+            'height': height,
+            'deviceScaleFactor': 1,
+            'mobile': False
+        })
         driver.get(f"https://www.zimoluo.me/{pathname}")
 
         WebDriverWait(driver, 10).until(
