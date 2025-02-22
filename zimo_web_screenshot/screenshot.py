@@ -13,7 +13,7 @@ def set_local_storage(driver, data):
         f"localStorage.setItem('websiteSettings', '{json.dumps(data)}');")
 
 
-def take_screenshot(width, height, theme_name, pathname, delay, filename, quality, custom_data=None):
+def take_screenshot(width, height, theme_name, pathname, delay, filename, quality, scrollY, custom_data=None):
     try:
         chrome_options = Options()
         chrome_options.add_argument(f"--window-size={width},{height}")
@@ -50,7 +50,11 @@ def take_screenshot(width, height, theme_name, pathname, delay, filename, qualit
 
         driver.refresh()
 
-        time.sleep(2)  # Wait for page to load
+        time.sleep(2)
+
+        driver.execute_script("window.scrollTo(0, arguments[0]);", scrollY)
+
+        time.sleep(1.5)
 
         time.sleep(delay)  # Optional delay before taking the screenshot
 
@@ -82,6 +86,8 @@ def main():
                         default=1.5, help='The quality of the output image')
     parser.add_argument('-c', '--custom', type=str,
                         help='Path to the custom theme JSON config data')
+    parser.add_argument('-sy', '--scrollY', type=int,
+                        default=0, help='Vertical scroll offset (in pixels)')
 
     args = parser.parse_args()
 
@@ -92,7 +98,7 @@ def main():
                 custom_data = json.load(file)
 
         take_screenshot(args.width, args.height, args.theme,
-                        args.pathname, args.delay, args.filename, args.quality, custom_data)
+                        args.pathname, args.delay, args.filename, args.quality, args.scrollY, custom_data)
     except Exception as e:
         print(f"Failed to take screenshot: {e}")
 
